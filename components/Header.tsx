@@ -44,7 +44,6 @@ const Header: React.FC<HeaderProps> = ({ onAdminClick, lang, setLang }) => {
     { name: t.nav.services, href: '/#services' },
     { name: t.nav.partners, href: '/#partners' },
     { name: t.nav.leadership, href: '/#about' },
-    { name: 'Resources', href: '/resources' },
     { name: 'Client Portal', href: '/#client-portal' },
     { name: t.nav.contact, href: '/#contact' },
   ];
