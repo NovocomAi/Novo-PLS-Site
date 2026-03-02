@@ -1,7 +1,0 @@
-{
-  "name": "PLS Consultants - Professional Legal Services",
-  "description": "A prestigious multi-disciplinary consultancy website for legal, financial, and translation services between the UK and Portugal, featuring AI-powered legal guidance.",
-  "requestFramePermissions": [
-    "geolocation"
-  ]
-}
