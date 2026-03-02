@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Language } from '../translations';
 
@@ -21,6 +21,9 @@ const ClientDashboardPage: React.FC<ClientDashboardPageProps> = ({ lang }) => {
   const [saving, setSaving] = useState(false);
   const [user, setUser] = useState<any>(null);
   const [documents, setDocuments] = useState<any[]>([]);
+  const [clientId, setClientId] = useState<string | null>(null);
+  const [uploadTargetCat, setUploadTargetCat] = useState<string | null>(null);
+  const categoryInputRef = useRef<HTMLInputElement>(null);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -62,6 +65,7 @@ const ClientDashboardPage: React.FC<ClientDashboardPageProps> = ({ lang }) => {
             if (cErr) throw cErr;
 
             if (clientRow?.id) {
+              setClientId(clientRow.id);
               const { data: docs, error: dErr } = await supabase
                 .from('documents')
                 .select(
@@ -125,6 +129,74 @@ const ClientDashboardPage: React.FC<ClientDashboardPageProps> = ({ lang }) => {
       setSaving(false);
       alert('Profile saved.');
     }, 400);
+  };
+
+  const handleFileUpload = (category: string) => async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!user) {
+      alert('You are not logged in. Please log in again.');
+      return;
+    }
+    try {
+      if (!clientId) throw new Error('Client record not found. Please log out and log in again.');
+
+      const safeName = file.name.replace(/\s+/g, ' ').trim();
+      const objectPath = `${clientId}/${category}/${Date.now()}-${safeName}`;
+
+      const { error: upErr } = await supabase.storage
+        .from('documents')
+        .upload(objectPath, file, { contentType: file.type || undefined, upsert: false });
+      if (upErr) throw upErr;
+
+      let dbCategory: 'identity' | 'accounting' | 'other' = 'other';
+      let docKind = 'other';
+      if (category === 'BANK') {
+        dbCategory = 'accounting';
+        docKind = 'bank_statement';
+      } else if (category === 'COMPLIANCE') {
+        dbCategory = 'accounting';
+        docKind = 'compliance';
+      } else if (category === 'EXPENSES') {
+        dbCategory = 'accounting';
+        docKind = 'expenses';
+      }
+
+      const { data: inserted, error: insErr } = await supabase
+        .from('documents')
+        .insert({
+          client_id: clientId,
+          name: file.name,
+          category: dbCategory,
+          doc_kind: docKind,
+          file_path: objectPath,
+          file_size: file.size,
+          mime_type: file.type || null,
+        })
+        .select('id, uploaded_at')
+        .single();
+      if (insErr) throw insErr;
+
+      const newDoc = {
+        id: inserted?.id || Math.random().toString(36).substr(2, 9),
+        name: file.name,
+        category,
+        subCategory: undefined,
+        uploadDate: inserted?.uploaded_at
+          ? new Date(inserted.uploaded_at).toLocaleString()
+          : new Date().toLocaleString(),
+        storagePath: objectPath,
+        url: null,
+        thumbnail: '📄',
+      };
+
+      setDocuments((prev) => [newDoc, ...prev]);
+    } catch (err: any) {
+      console.error('Error in handleFileUpload:', err);
+      alert(err?.message || 'Upload failed. Please try again.');
+    } finally {
+      e.target.value = '';
+    }
   };
 
   const getIdentityDoc = (tag: string) =>
@@ -441,7 +513,7 @@ const ClientDashboardPage: React.FC<ClientDashboardPageProps> = ({ lang }) => {
                   marginBottom: '16px',
                 }}
               >
-                Accounting Documents
+                Upload Documents
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {[
@@ -460,7 +532,7 @@ const ClientDashboardPage: React.FC<ClientDashboardPageProps> = ({ lang }) => {
                       borderBottom: '1px solid #f8fafc',
                     }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                       <div
                         style={{
                           width: '32px',
@@ -478,13 +550,40 @@ const ClientDashboardPage: React.FC<ClientDashboardPageProps> = ({ lang }) => {
                       <span style={{ fontSize: '13px', fontWeight: '800', color: '#0f172a' }}>
                         {item.label}
                       </span>
+                      <span style={{ fontSize: '11px', fontWeight: '700', color: '#94a3b8' }}>
+                        ({getDocCount(item.cat)})
+                      </span>
                     </div>
-                    <span style={{ fontSize: '14px', fontWeight: '900', color: '#0f172a' }}>
-                      {getDocCount(item.cat)}
-                    </span>
+                    <button
+                      onClick={() => {
+                        setUploadTargetCat(item.cat);
+                        setTimeout(() => categoryInputRef.current?.click(), 0);
+                      }}
+                      style={{
+                        backgroundColor: '#0f172a',
+                        color: 'white',
+                        padding: '6px 14px',
+                        borderRadius: '8px',
+                        border: 'none',
+                        cursor: 'pointer',
+                        fontSize: '11px',
+                        fontWeight: '800',
+                      }}
+                    >
+                      UPLOAD
+                    </button>
                   </div>
                 ))}
               </div>
+              <input
+                type="file"
+                ref={categoryInputRef}
+                style={{ display: 'none' }}
+                aria-label="Upload document"
+                title="Upload document"
+                accept="image/png,image/jpeg,image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt"
+                onChange={(e) => uploadTargetCat && handleFileUpload(uploadTargetCat)(e)}
+              />
             </div>
 
             <div style={sidebarBoxStyle}>
