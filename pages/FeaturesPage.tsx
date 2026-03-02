@@ -11,7 +11,11 @@ const FeaturesPage: React.FC = () => {
             <h1 className="fp-title">Admin Guide: Site Features</h1>
             <div className="fp-subtitle">A practical, non-technical overview for admin users.</div>
           </div>
-          <button onClick={() => (window.location.href = '/admin/clients')} className="fp-btn-back">
+          <button
+            type="button"
+            onClick={() => (window.location.href = '/admin/clients')}
+            className="fp-btn-back"
+          >
             Back Home
           </button>
         </div>
