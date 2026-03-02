@@ -434,6 +434,7 @@ const ClientDocumentsPage: React.FC = () => {
                   {getIdentityDoc('PASSPORT') ? (
                     <img
                       src={getIdentityDoc('PASSPORT').thumbnail}
+                      alt="Passport document"
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />
                   ) : (
@@ -491,6 +492,7 @@ const ClientDocumentsPage: React.FC = () => {
                   {getIdentityDoc('LICENSE') ? (
                     <img
                       src={getIdentityDoc('LICENSE').thumbnail}
+                      alt="Driver's licence document"
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />
                   ) : (
@@ -757,6 +759,7 @@ const ClientDocumentsPage: React.FC = () => {
                             {d.isImage ? (
                               <img
                                 src={d.url}
+                                alt={d.name}
                                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                               />
                             ) : d.isPdf ? (
@@ -778,6 +781,7 @@ const ClientDocumentsPage: React.FC = () => {
                                 </div>
                                 <img
                                   src={d.thumbUrl}
+                                  alt={d.name}
                                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                   onError={(e) => {
                                     (e.currentTarget as any).style.display = 'none';

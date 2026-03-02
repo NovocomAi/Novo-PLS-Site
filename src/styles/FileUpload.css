@@ -15,12 +15,12 @@
 }
 
 .upload-zone:hover {
-  border-color: #0057FF;
+  border-color: #0057ff;
   background: #f0f4ff;
 }
 
 .upload-zone.drag-over {
-  border-color: #0057FF;
+  border-color: #0057ff;
   background: #e8f0ff;
   box-shadow: 0 0 10px rgba(0, 87, 255, 0.1);
 }
@@ -52,7 +52,7 @@
   width: 100%;
   padding: 12px;
   margin-top: 16px;
-  background: #0057FF;
+  background: #0057ff;
   color: white;
   border: none;
   border-radius: 6px;
@@ -80,8 +80,8 @@
 
 .message.success {
   background: #f0f9ff;
-  color: #0057FF;
-  border: 1px solid #0057FF;
+  color: #0057ff;
+  border: 1px solid #0057ff;
 }
 
 .message.error {
@@ -128,4 +128,14 @@
 
 .files-list li small {
   color: #999;
+}
+
+.hidden-file-input {
+  display: none;
+}
+
+.passport-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

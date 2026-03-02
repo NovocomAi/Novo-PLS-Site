@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../src/styles/FileUpload.css';
 
 const supabaseUrl = 'https://ivrnnzubplghzizefmjw.supabase.co';
 const supabaseAnonKey =
@@ -401,7 +402,8 @@ const ClientDocumentsPage: React.FC = () => {
                   {getIdentityDoc('PASSPORT') ? (
                     <img
                       src={getIdentityDoc('PASSPORT').thumbnail}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      alt="Passport document thumbnail"
+                      className="passport-thumbnail"
                     />
                   ) : (
                     <span style={{ fontSize: '40px', opacity: 0.1 }}>Passport</span>
@@ -436,7 +438,9 @@ const ClientDocumentsPage: React.FC = () => {
                 <input
                   type="file"
                   ref={passportInputRef}
-                  style={{ display: 'none' }}
+                  className="hidden-file-input"
+                  aria-label="Upload passport document"
+                  title="Upload passport document"
                   accept="image/png,image/jpeg,image/*,.pdf"
                   onChange={handleFileUpload('IDENTITY', 'PASSPORT')}
                 />
@@ -493,7 +497,9 @@ const ClientDocumentsPage: React.FC = () => {
                 <input
                   type="file"
                   ref={licenseInputRef}
-                  style={{ display: 'none' }}
+                  className="hidden-file-input"
+                  aria-label="Upload driving licence document"
+                  title="Upload driving licence document"
                   accept="image/png,image/jpeg,image/*,.pdf"
                   onChange={handleFileUpload('IDENTITY', 'LICENSE')}
                 />
@@ -558,7 +564,9 @@ const ClientDocumentsPage: React.FC = () => {
             <input
               type="file"
               ref={categoryInputRef}
-              style={{ display: 'none' }}
+              className="hidden-file-input"
+              aria-label="Upload category document"
+              title="Upload category document"
               accept="image/png,image/jpeg,image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt"
               onChange={(e) => uploadTargetCat && handleFileUpload(uploadTargetCat)(e)}
             />
