@@ -399,15 +399,32 @@ const ClientDocumentsPage: React.FC = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  {getIdentityDoc('PASSPORT') ? (
-                    <img
-                      src={getIdentityDoc('PASSPORT').thumbnail}
-                      alt="Passport document thumbnail"
-                      className="passport-thumbnail"
-                    />
-                  ) : (
-                    <span style={{ fontSize: '40px', opacity: 0.1 }}>Passport</span>
-                  )}
+                  {(() => {
+                    const doc = getIdentityDoc('PASSPORT');
+                    if (!doc)
+                      return <span style={{ fontSize: '40px', opacity: 0.1 }}>Passport</span>;
+                    if (doc.thumbnail && doc.thumbnail !== '📄') {
+                      return (
+                        <img
+                          src={doc.thumbnail}
+                          alt="Passport document thumbnail"
+                          className="passport-thumbnail"
+                        />
+                      );
+                    }
+                    return (
+                      <span
+                        style={{
+                          fontSize: '13px',
+                          color: '#64748b',
+                          fontWeight: 'bold',
+                          padding: '8px',
+                        }}
+                      >
+                        {doc.name}
+                      </span>
+                    );
+                  })()}
                 </div>
                 <div
                   style={{
@@ -459,15 +476,33 @@ const ClientDocumentsPage: React.FC = () => {
                     justifyContent: 'center',
                   }}
                 >
-                  {getIdentityDoc('LICENSE') ? (
-                    <img
-                      src={getIdentityDoc('LICENSE').thumbnail}
-                      alt="Driver's licence document preview"
-                      title="Driver's licence"
-                    />
-                  ) : (
-                    <span style={{ fontSize: '40px', opacity: 0.1 }}>License</span>
-                  )}
+                  {(() => {
+                    const doc = getIdentityDoc('LICENSE');
+                    if (!doc)
+                      return <span style={{ fontSize: '40px', opacity: 0.1 }}>License</span>;
+                    if (doc.thumbnail && doc.thumbnail !== '📄') {
+                      return (
+                        <img
+                          src={doc.thumbnail}
+                          alt="Driver's licence document preview"
+                          title="Driver's licence"
+                          className="passport-thumbnail"
+                        />
+                      );
+                    }
+                    return (
+                      <span
+                        style={{
+                          fontSize: '13px',
+                          color: '#64748b',
+                          fontWeight: 'bold',
+                          padding: '8px',
+                        }}
+                      >
+                        {doc.name}
+                      </span>
+                    );
+                  })()}
                 </div>
                 <div
                   style={{
