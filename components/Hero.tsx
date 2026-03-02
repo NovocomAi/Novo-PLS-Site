@@ -51,7 +51,7 @@ const Hero: React.FC<HeroProps> = ({ lang }) => {
             </a>
           </div>
 
-          <div className="mt-16 grid grid-cols-3 gap-8 border-t border-white/10 pt-10">
+          <div className="mt-8 grid grid-cols-3 gap-8 border-t border-white/10 pt-10">
             <div>
               <div className="text-3xl font-bold text-white">3+</div>
               <div className="text-sm text-slate-400 font-medium">{t.partners}</div>
