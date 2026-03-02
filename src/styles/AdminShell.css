@@ -1,0 +1,98 @@
+.admin-shell {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  font-family: Arial, sans-serif;
+}
+
+.admin-shell__container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 110px 24px 32px;
+}
+
+.admin-shell__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.admin-shell__label {
+  font-size: 12px;
+  font-weight: 900;
+  color: #94a3b8;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.admin-shell__title {
+  font-size: 30px;
+  margin: 8px 0 0;
+  color: #0f172a;
+  font-weight: 900;
+}
+
+.admin-shell__subtitle {
+  margin-top: 8px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.admin-shell__actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.admin-shell__btn-features {
+  background: #ffffff;
+  color: #0f172a;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  font-weight: 900;
+  cursor: pointer;
+  height: 40px;
+}
+
+.admin-shell__btn-exit {
+  background: #0f172a;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 0;
+  font-weight: 900;
+  cursor: pointer;
+  height: 40px;
+}
+
+.admin-shell__tabs {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-shell__tab {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  color: #0f172a;
+  font-weight: 900;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.admin-shell__tab--active {
+  border-color: #0f172a;
+  background: #0f172a;
+  color: #fff;
+}
+
+.admin-shell__content {
+  margin-top: 18px;
+}
+

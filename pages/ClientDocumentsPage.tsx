@@ -462,7 +462,8 @@ const ClientDocumentsPage: React.FC = () => {
                   {getIdentityDoc('LICENSE') ? (
                     <img
                       src={getIdentityDoc('LICENSE').thumbnail}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      alt="Driver's licence document preview"
+                      title="Driver's licence"
                     />
                   ) : (
                     <span style={{ fontSize: '40px', opacity: 0.1 }}>License</span>

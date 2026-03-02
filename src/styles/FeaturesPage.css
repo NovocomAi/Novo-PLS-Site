@@ -1,0 +1,90 @@
+.fp-page {
+  min-height: 100vh;
+  background-color: #fdfcfb;
+  font-family: Arial, sans-serif;
+}
+
+.fp-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 120px 24px 48px;
+}
+
+.fp-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.fp-label {
+  font-size: 12px;
+  font-weight: 900;
+  color: #94a3b8;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.fp-title {
+  font-size: 34px;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 8px 0 0;
+}
+
+.fp-subtitle {
+  margin-top: 8px;
+  color: #64748b;
+  font-weight: 800;
+}
+
+.fp-btn-back {
+  background: #0f172a;
+  color: #ffffff;
+  border: 0;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 900;
+  cursor: pointer;
+  height: 40px;
+}
+
+.fp-grid {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.fp-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.fp-card--mt18 {
+  margin-top: 18px;
+}
+
+.fp-card--mt14 {
+  margin-top: 14px;
+}
+
+.fp-card-title {
+  font-size: 18px;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+}
+
+.fp-card-text {
+  margin: 0;
+  color: #64748b;
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 2;
+}
+

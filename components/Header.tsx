@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { LOGO_COMPONENT } from '../constants.tsx';
+import '../src/styles/Header.css';
 import { Language, translations } from '../translations.ts';
 
 interface HeaderProps {
@@ -90,9 +91,13 @@ const Header: React.FC<HeaderProps> = ({ onAdminClick, lang, setLang }) => {
             onClick={() => setLang(lang === 'en' ? 'pt' : 'en')}
             className={`flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all text-xs font-bold uppercase tracking-wider relative md:static top-[35px] md:top-0 right-[-40px] md:right-0 border-slate-200 text-slate-600 hover:bg-slate-50`}
           >
-            <span style={{ color: lang === 'en' ? '#c5a059' : '#64748b' }}>EN</span>
+            <span className={lang === 'en' ? 'lang-toggle-active' : 'lang-toggle-inactive'}>
+              EN
+            </span>
             <div className="w-px h-3 bg-current opacity-30"></div>
-            <span style={{ color: lang === 'pt' ? '#c5a059' : '#64748b' }}>PT</span>
+            <span className={lang === 'pt' ? 'lang-toggle-active' : 'lang-toggle-inactive'}>
+              PT
+            </span>
           </button>
 
           <button
