@@ -161,6 +161,13 @@ const ClientDashboardPage: React.FC<ClientDashboardPageProps> = ({ lang }) => {
     boxShadow: '0 4px 20px rgba(0,0,0,0.02)',
   };
 
+  if (!loading && !user) {
+    window.location.href = '/#client-portal';
+    return null;
+  }
+
+  if (loading) return null;
+
   return (
     <div
       style={{ minHeight: '100vh', backgroundColor: '#f9fafb', fontFamily: 'Arial, sans-serif' }}

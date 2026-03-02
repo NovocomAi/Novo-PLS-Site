@@ -261,6 +261,11 @@ const ClientDocumentsPage: React.FC = () => {
     { label: 'OTHER', color: '#93c5fd', cat: 'OTHER', icon: '📂' },
   ];
 
+  if (!loading && !user) {
+    window.location.href = '/#client-portal';
+    return null;
+  }
+
   if (loading) return null;
 
   return (
