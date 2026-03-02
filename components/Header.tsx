@@ -118,7 +118,7 @@ const Header: React.FC<HeaderProps> = ({ onAdminClick, lang, setLang }) => {
 
           {!hideCta && (
             <Link
-              to="/#client-portal"
+              to="/admin"
               className={`text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-lg ${
                 lang === 'pt' ? 'relative right-[15px]' : ''
               }`}
@@ -128,7 +128,7 @@ const Header: React.FC<HeaderProps> = ({ onAdminClick, lang, setLang }) => {
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#a88650')}
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#c5a059')}
             >
-              {t.nav.cta}
+              Admin Login
             </Link>
           )}
         </div>
