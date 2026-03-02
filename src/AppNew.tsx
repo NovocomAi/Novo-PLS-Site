@@ -6,41 +6,39 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
-import ProtectedRoute from './components/ProtectedRoute';
 
 // Layout components
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import AdminDashboard from '../components/AdminDashboard';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 // Public pages
+import FeaturesPage from '../pages/FeaturesPage';
 import HomePage from '../pages/HomePage';
 import ResourcesPage from '../pages/ResourcesPage';
-import LoginPage from './pages/LoginPage';
-import SignUpPageNew from './pages/SignUpPageNew';
 import AdminLoginPage from './pages/AdminLoginPage';
-import ClientsDirectoryPage from './pages/ClientsDirectoryPage';
 import ClientPortalPage from './pages/ClientPortalPage';
-import FeaturesPage from '../pages/FeaturesPage';
+import ClientsDirectoryPage from './pages/ClientsDirectoryPage';
+import SignUpPageNew from './pages/SignUpPageNew';
 
 // AI pages (public but enhanced when logged in)
-import AiLegalPage from '../pages/AiLegalPage';
-import AiTranslationPage from '../pages/AiTranslationPage';
 import AiAnalysisPage from '../pages/AiAnalysisPage';
 import AiChatPage from '../pages/AiChatPage';
+import AiLegalPage from '../pages/AiLegalPage';
+import AiTranslationPage from '../pages/AiTranslationPage';
 
 // Protected client pages
 import ClientDashboardPage from '../pages/ClientDashboardPage';
 import ClientDocumentsPage from '../pages/ClientDocumentsPage';
 
 // Protected admin pages
-import AdminClientsPage from '../pages/AdminClientsPage';
 import AdminClientDetailPage from '../pages/AdminClientDetailPage';
+import AdminClientSelectPage from '../pages/AdminClientSelectPage';
+import AdminClientsPage from '../pages/AdminClientsPage';
 import AdminDocumentsPage from '../pages/AdminDocumentsPage';
 import AdminInvoicesPage from '../pages/AdminInvoicesPage';
 import AdminServicesPage from '../pages/AdminServicesPage';
 import AdminUsersPage from '../pages/AdminUsersPage';
-import AdminClientSelectPage from '../pages/AdminClientSelectPage';
 
 import { Language } from '../translations';
 
@@ -83,9 +81,8 @@ const AppContent: React.FC = () => {
           <Route path="/admin" element={<AdminLoginPage />} />
           <Route path="/directory" element={<ClientsDirectoryPage />} />
           <Route path="/resources" element={<ResourcesPage />} />
-          <Route path="/features" element={<FeaturesPage />} />
           <Route path="/portal" element={<ClientPortalPage />} />
-          
+
           {/* AI routes (public) */}
           <Route path="/ai/legal" element={<AiLegalPage lang={lang} />} />
           <Route path="/ai/translation" element={<AiTranslationPage lang={lang} />} />
@@ -104,6 +101,7 @@ const AppContent: React.FC = () => {
           <Route path="/admin/services" element={<AdminServicesPage />} />
           <Route path="/admin/users" element={<AdminUsersPage />} />
           <Route path="/admin/client-select" element={<AdminClientSelectPage />} />
+          <Route path="/admin/features" element={<FeaturesPage />} />
         </Routes>
       </main>
 
