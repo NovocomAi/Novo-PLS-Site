@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles/ClientDocumentsPage.css';
 
 const supabaseUrl = 'https://ivrnnzubplghzizefmjw.supabase.co';
 const supabaseAnonKey =
@@ -296,239 +297,87 @@ const ClientDocumentsPage: React.FC = () => {
   if (loading) return null;
 
   return (
-    <div
-      style={{ minHeight: '100vh', backgroundColor: '#f9fafb', fontFamily: 'Arial, sans-serif' }}
-    >
-      <div
-        style={{
-          maxWidth: '1280px',
-          margin: '0 auto',
-          padding: '110px 24px 32px 24px',
-          width: '100%',
-          boxSizing: 'border-box',
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'flex-start',
-            paddingLeft: '10px',
-          }}
-        >
-          <div style={{ flex: '1' }}>
-            <h1
-              style={{
-                fontSize: '32px',
-                fontWeight: 'bold',
-                color: '#0f172a',
-                margin: '0',
-                display: 'flex',
-                alignItems: 'baseline',
-                whiteSpace: 'nowrap',
-              }}
-            >
+    <div className="cdp-page">
+      <div className="cdp-container">
+        <div className="cdp-header">
+          <div className="cdp-header-left">
+            <h1 className="cdp-title">
               <span>Client Portal</span>
-              <span style={{ color: '#c5a059', marginLeft: '16px' }}>Master Secure Workspace</span>
+              <span className="cdp-title-sub">Master Secure Workspace</span>
             </h1>
-            <p
-              style={{
-                color: '#64748b',
-                margin: '8px 0 0 15px',
-                fontSize: '14px',
-                fontWeight: 'bold',
-              }}
-            >
-              manage your profile , upload all your documents
-            </p>
+            <p className="cdp-subtitle">manage your profile , upload all your documents</p>
           </div>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '140px 140px 110px',
-              gap: '8px',
-              paddingTop: '4px',
-            }}
-          >
-            <div style={{ width: '140px' }}></div>
-            <button
-              onClick={() => navigate('/client')}
-              style={{
-                backgroundColor: '#c5a059',
-                color: '#ffffff',
-                padding: '10px 0',
-                borderRadius: '10px',
-                border: 'none',
-                fontWeight: '800',
-                fontSize: '14px',
-                cursor: 'pointer',
-                height: '44px',
-              }}
-            >
+          <div className="cdp-header-right">
+            <div className="cdp-header-spacer"></div>
+            <button type="button" onClick={() => navigate('/client')} className="cdp-btn-back">
               Back to portal
             </button>
             <button
+              type="button"
               onClick={async () => {
                 await supabase.auth.signOut();
                 window.location.href = '/#client-portal';
               }}
-              style={{
-                backgroundColor: 'white',
-                color: '#64748b',
-                padding: '10px 0',
-                borderRadius: '10px',
-                border: '1px solid #e2e8f0',
-                fontWeight: '800',
-                fontSize: '14px',
-                cursor: 'pointer',
-                height: '44px',
-              }}
+              className="cdp-btn-logout"
             >
               Logout
             </button>
           </div>
         </div>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1.8fr 1fr',
-            gap: '24px',
-            marginTop: '48px',
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: 'white',
-              borderRadius: '24px',
-              padding: '40px',
-              border: '1px solid #e2e8f0',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
-            }}
-          >
-            <h2
-              style={{
-                fontSize: '28px',
-                fontWeight: 'bold',
-                marginBottom: '32px',
-                color: '#0f172a',
-              }}
-            >
-              Identity Documents
-            </h2>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
-              <div style={{ textAlign: 'center' }}>
-                <div
-                  style={{
-                    border: '1px solid #f1f5f9',
-                    borderRadius: '16px',
-                    height: '180px',
-                    overflow: 'hidden',
-                    backgroundColor: '#fcfcfc',
-                    marginBottom: '16px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
+        <div className="cdp-main-grid">
+          <div className="cdp-identity-card">
+            <h2 className="cdp-identity-title">Identity Documents</h2>
+            <div className="cdp-identity-cols">
+              <div className="cdp-identity-col">
+                <div className="cdp-doc-preview">
                   {getIdentityDoc('PASSPORT') ? (
-                    <img
-                      src={getIdentityDoc('PASSPORT').thumbnail}
-                      alt="Passport document"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
+                    <img src={getIdentityDoc('PASSPORT').thumbnail} alt="Passport document" />
                   ) : (
-                    <span style={{ fontSize: '40px', opacity: 0.1 }}>Passport</span>
+                    <span className="cdp-doc-preview-placeholder">Passport</span>
                   )}
                 </div>
-                <div
-                  style={{
-                    fontSize: '13px',
-                    fontWeight: 'bold',
-                    marginBottom: '12px',
-                    color: '#0f172a',
-                  }}
-                >
-                  Passport.png
-                </div>
+                <div className="cdp-doc-label">Passport.png</div>
                 <button
+                  type="button"
                   onClick={() => passportInputRef.current?.click()}
-                  style={{
-                    width: '100%',
-                    padding: '12px',
-                    backgroundColor: '#0f172a',
-                    color: 'white',
-                    borderRadius: '10px',
-                    border: 'none',
-                    cursor: 'pointer',
-                    fontWeight: 'bold',
-                    fontSize: '14px',
-                  }}
+                  className="cdp-upload-btn"
                 >
                   UPLOAD PASSPORT
                 </button>
                 <input
                   type="file"
                   ref={passportInputRef}
-                  style={{ display: 'none' }}
+                  className="cdp-hidden-input"
+                  aria-label="Upload passport document"
                   accept="image/png,image/jpeg,image/*,.pdf"
                   onChange={handleFileUpload('IDENTITY', 'PASSPORT')}
                 />
               </div>
-              <div style={{ textAlign: 'center' }}>
-                <div
-                  style={{
-                    border: '1px solid #f1f5f9',
-                    borderRadius: '16px',
-                    height: '180px',
-                    overflow: 'hidden',
-                    backgroundColor: '#fcfcfc',
-                    marginBottom: '16px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
+              <div className="cdp-identity-col">
+                <div className="cdp-doc-preview">
                   {getIdentityDoc('LICENSE') ? (
                     <img
                       src={getIdentityDoc('LICENSE').thumbnail}
                       alt="Driver's licence document"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />
                   ) : (
-                    <span style={{ fontSize: '40px', opacity: 0.1 }}>License</span>
+                    <span className="cdp-doc-preview-placeholder">License</span>
                   )}
                 </div>
-                <div
-                  style={{
-                    fontSize: '13px',
-                    fontWeight: 'bold',
-                    marginBottom: '12px',
-                    color: '#0f172a',
-                  }}
-                >
-                  Drivers Licence.png
-                </div>
+                <div className="cdp-doc-label">Drivers Licence.png</div>
                 <button
+                  type="button"
                   onClick={() => licenseInputRef.current?.click()}
-                  style={{
-                    width: '100%',
-                    padding: '12px',
-                    backgroundColor: '#0f172a',
-                    color: 'white',
-                    borderRadius: '10px',
-                    border: 'none',
-                    cursor: 'pointer',
-                    fontWeight: 'bold',
-                    fontSize: '14px',
-                  }}
+                  className="cdp-upload-btn"
                 >
                   UPLOAD LICENCE
                 </button>
                 <input
                   type="file"
                   ref={licenseInputRef}
-                  style={{ display: 'none' }}
+                  className="cdp-hidden-input"
+                  aria-label="Upload driver's licence document"
                   accept="image/png,image/jpeg,image/*,.pdf"
                   onChange={handleFileUpload('IDENTITY', 'LICENSE')}
                 />
@@ -536,55 +385,22 @@ const ClientDocumentsPage: React.FC = () => {
             </div>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div className="cdp-categories-col">
             {categories.map((item) => (
-              <div
-                key={item.label}
-                style={{
-                  backgroundColor: 'white',
-                  border: '1px solid #e2e8f0',
-                  borderRadius: '24px',
-                  padding: '24px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.02)',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                  <div
-                    style={{
-                      width: '50px',
-                      height: '50px',
-                      backgroundColor: item.color,
-                      borderRadius: '12px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '24px',
-                    }}
-                  >
+              <div key={item.label} className="cdp-category-card">
+                <div className="cdp-category-left">
+                  <div className={`cdp-category-icon cdp-color-${item.label.toLowerCase()}`}>
                     {item.icon}
                   </div>
-                  <span style={{ fontSize: '16px', fontWeight: 'bold', color: '#0f172a' }}>
-                    {item.label}
-                  </span>
+                  <span className="cdp-category-label">{item.label}</span>
                 </div>
                 <button
+                  type="button"
                   onClick={() => {
                     setUploadTargetCat(item.cat);
                     categoryInputRef.current?.click();
                   }}
-                  style={{
-                    backgroundColor: '#0f172a',
-                    color: 'white',
-                    padding: '10px 30px',
-                    borderRadius: '12px',
-                    border: 'none',
-                    cursor: 'pointer',
-                    fontSize: '13px',
-                    fontWeight: 'bold',
-                  }}
+                  className="cdp-upload-btn-sm"
                 >
                   UPLOAD
                 </button>
@@ -593,89 +409,35 @@ const ClientDocumentsPage: React.FC = () => {
             <input
               type="file"
               ref={categoryInputRef}
-              style={{ display: 'none' }}
+              className="cdp-hidden-input"
+              aria-label="Upload category document"
               accept="image/png,image/jpeg,image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt"
-              onChange={(e) => uploadTargetCat && handleFileUpload(uploadTargetCat)(e)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                uploadTargetCat && handleFileUpload(uploadTargetCat)(e)
+              }
             />
           </div>
         </div>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '16px',
-            marginTop: '48px',
-            marginBottom: '22px',
-          }}
-        >
+        <div className="cdp-stats-grid">
           {categories.map((item) => (
             <div
               key={item.label}
+              className={`cdp-stat-card${activeCategory === item.cat ? ' cdp-stat-card--active' : ''}`}
               onClick={() => setActiveCategory(activeCategory === item.cat ? null : item.cat)}
-              style={{
-                cursor: 'pointer',
-                backgroundColor: 'white',
-                border: activeCategory === item.cat ? '3.5px solid #0f172a' : '1.5px solid #e2e8f0',
-                borderRadius: '16px',
-                padding: '24px',
-                textAlign: 'center',
-                boxShadow: '0 8px 30px rgba(0,0,0,0.02)',
-              }}
             >
-              <div
-                style={{
-                  fontSize: '10px',
-                  color: '#94a3b8',
-                  fontWeight: '800',
-                  textTransform: 'uppercase',
-                  marginBottom: '8px',
-                  letterSpacing: '0.1em',
-                }}
-              >
-                {item.label}
-              </div>
-              <div style={{ fontSize: '32px', fontWeight: '900', color: '#0f172a' }}>
-                {getCount(item.cat)}
-              </div>
-              <div
-                style={{
-                  background: item.color,
-                  height: '5px',
-                  borderRadius: '3px',
-                  marginTop: '16px',
-                  width: '45px',
-                  margin: '16px auto 0',
-                }}
-              ></div>
+              <div className="cdp-stat-label">{item.label}</div>
+              <div className="cdp-stat-count">{getCount(item.cat)}</div>
+              <div className={`cdp-stat-bar cdp-color-${item.label.toLowerCase()}`}></div>
             </div>
           ))}
         </div>
 
         {/* Uploaded documents */}
-        <div
-          style={{
-            backgroundColor: 'white',
-            borderRadius: '24px',
-            padding: '28px',
-            border: '1px solid #e2e8f0',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
-            marginBottom: '48px',
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'baseline',
-              gap: '12px',
-              marginBottom: '14px',
-            }}
-          >
-            <div style={{ fontSize: '14px', fontWeight: 900, color: '#0f172a' }}>
-              Uploaded Documents
-            </div>
-            <div style={{ fontSize: '11px', fontWeight: 800, color: '#94a3b8' }}>
+        <div className="cdp-docs-panel">
+          <div className="cdp-docs-header">
+            <div className="cdp-docs-title">Uploaded Documents</div>
+            <div className="cdp-docs-filter">
               {activeCategory ? `Showing: ${activeCategory}` : 'Showing: ALL'}
             </div>
           </div>
@@ -684,147 +446,46 @@ const ClientDocumentsPage: React.FC = () => {
             .filter((cat) => !activeCategory || activeCategory === cat)
             .map((cat) => {
               const docs = getDocsFor(cat);
-              const color =
-                cat === 'IDENTITY'
-                  ? '#cbd5e1'
-                  : categories.find((c) => c.cat === cat)?.color || '#e2e8f0';
               return (
-                <div key={cat} style={{ marginTop: '18px' }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      gap: '12px',
-                      marginBottom: '10px',
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <div
-                        style={{
-                          width: '10px',
-                          height: '10px',
-                          borderRadius: '99px',
-                          background: color,
-                        }}
-                      ></div>
-                      <div style={{ fontSize: '12px', fontWeight: 900, color: '#0f172a' }}>
-                        {cat}
-                      </div>
-                      <div style={{ fontSize: '11px', fontWeight: 800, color: '#94a3b8' }}>
-                        ({docs.length})
-                      </div>
+                <div key={cat} className="cdp-cat-section">
+                  <div className="cdp-cat-header">
+                    <div className="cdp-cat-left">
+                      <div className={`cdp-cat-dot cdp-color-${cat.toLowerCase()}`}></div>
+                      <div className="cdp-cat-name">{cat}</div>
+                      <div className="cdp-cat-count">({docs.length})</div>
                     </div>
                   </div>
 
                   {docs.length === 0 ? (
-                    <div
-                      style={{
-                        fontSize: '12px',
-                        color: '#94a3b8',
-                        fontWeight: 700,
-                        padding: '14px 0',
-                      }}
-                    >
-                      No documents uploaded yet.
-                    </div>
+                    <div className="cdp-no-docs">No documents uploaded yet.</div>
                   ) : (
-                    <div
-                      style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(4, 1fr)',
-                        gap: '14px',
-                      }}
-                    >
+                    <div className="cdp-doc-grid">
                       {docs.map((d: any) => (
-                        <div
-                          key={d.id}
-                          style={{
-                            border: '1px solid #e2e8f0',
-                            borderRadius: '16px',
-                            overflow: 'hidden',
-                            background: '#ffffff',
-                          }}
-                        >
-                          <div
-                            style={{
-                              height: '120px',
-                              background: '#f8fafc',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              overflow: 'hidden',
-                            }}
-                          >
+                        <div key={d.id} className="cdp-doc-card">
+                          <div className="cdp-doc-thumb">
                             {d.isImage ? (
-                              <img
-                                src={d.url}
-                                alt={d.name}
-                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                              />
+                              <img src={d.url} alt={d.name} />
                             ) : d.isPdf ? (
-                              <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                                <div
-                                  style={{
-                                    position: 'absolute',
-                                    inset: 0,
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontSize: '18px',
-                                    fontWeight: 900,
-                                    opacity: 0.35,
-                                    color: '#0f172a',
-                                  }}
-                                >
-                                  PDF
-                                </div>
+                              <div className="cdp-pdf-thumb">
+                                <div className="cdp-pdf-overlay">PDF</div>
                                 <img
                                   src={d.thumbUrl}
                                   alt={d.name}
-                                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                  onError={(e) => {
-                                    (e.currentTarget as any).style.display = 'none';
+                                  onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                                    e.currentTarget.style.display = 'none';
                                   }}
                                 />
                               </div>
                             ) : (
-                              <div style={{ fontSize: '34px', opacity: 0.35 }}>📄</div>
+                              <div className="cdp-file-icon">📄</div>
                             )}
                           </div>
-                          <div style={{ padding: '12px' }}>
-                            <div
-                              style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'space-between',
-                                gap: '8px',
-                              }}
-                            >
-                              <div
-                                title={d.name}
-                                style={{
-                                  fontSize: '12px',
-                                  fontWeight: 900,
-                                  color: '#0f172a',
-                                  whiteSpace: 'nowrap',
-                                  overflow: 'hidden',
-                                  textOverflow: 'ellipsis',
-                                }}
-                              >
+                          <div className="cdp-doc-info">
+                            <div className="cdp-doc-name-row">
+                              <div className="cdp-doc-name" title={d.name}>
                                 {d.name}
                               </div>
-                              <div
-                                style={{
-                                  fontSize: '9px',
-                                  fontWeight: 900,
-                                  color: '#64748b',
-                                  border: '1px solid #e2e8f0',
-                                  padding: '2px 6px',
-                                  borderRadius: '999px',
-                                  whiteSpace: 'nowrap',
-                                }}
-                              >
+                              <div className="cdp-doc-type-badge">
                                 {d.isImage
                                   ? 'IMAGE'
                                   : d.isPdf
@@ -837,47 +498,20 @@ const ClientDocumentsPage: React.FC = () => {
                                       : 'FILE'}
                               </div>
                             </div>
-                            <div
-                              style={{
-                                fontSize: '10px',
-                                fontWeight: 800,
-                                color: '#94a3b8',
-                                marginTop: '4px',
-                              }}
-                            >
-                              {d.uploadDate || ''}
-                            </div>
-                            <div style={{ display: 'flex', gap: '8px', marginTop: '10px' }}>
+                            <div className="cdp-doc-date">{d.uploadDate || ''}</div>
+                            <div className="cdp-doc-actions">
                               <a
                                 href={d.url}
                                 target="_blank"
                                 rel="noreferrer"
-                                style={{
-                                  flex: 1,
-                                  textDecoration: 'none',
-                                  backgroundColor: '#0f172a',
-                                  color: 'white',
-                                  padding: '8px 10px',
-                                  borderRadius: '10px',
-                                  textAlign: 'center',
-                                  fontSize: '11px',
-                                  fontWeight: 900,
-                                }}
+                                className="cdp-btn-view"
                               >
                                 View
                               </a>
                               <button
+                                type="button"
                                 onClick={() => handleDelete(d)}
-                                style={{
-                                  backgroundColor: 'white',
-                                  color: '#ef4444',
-                                  border: '1px solid #fecaca',
-                                  padding: '8px 10px',
-                                  borderRadius: '10px',
-                                  fontSize: '11px',
-                                  fontWeight: 900,
-                                  cursor: 'pointer',
-                                }}
+                                className="cdp-btn-delete"
                               >
                                 Delete
                               </button>
